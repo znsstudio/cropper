@@ -8,4 +8,5 @@ assets
 docs
 workspace
 CHANGELOG.md
+*.zip
 **/.*
