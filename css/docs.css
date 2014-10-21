@@ -40,7 +40,7 @@
 
 @media (min-width: 992px) {
   .img-container {
-    max-height: 450px;
+    height: 360px;
   }
 }
 
@@ -58,9 +58,39 @@
   margin-bottom: 10px;
 }
 
-.docs-btn-group .button-group button {
+.docs-btn-group .button-group > .btn {
   margin-right: 10px;
   margin-bottom: 10px;
+}
+
+.docs-toolbar {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.docs-toolbar .docs-tooltip {
+  display: block;
+  margin: -6px -12px;
+  padding: 6px 12px;
+}
+
+.docs-data-url .btn {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.docs-data-url textarea {
+  margin-bottom: 10px;
+}
+
+.docs-data-url img {
+  max-height: 134px;
+}
+
+.docs-flip-horizontal {
+  -ms-transform: scale(-1, 1);
+  -webkit-transform: scale(-1, 1);
+  transform: scale(-1, 1);
 }
 
 /* Examples */

@@ -7,10 +7,11 @@ $(function() {
 
   (function() {
     var $image = $(".img-container img"),
-        $dataX = $("#data-x"),
-        $dataY = $("#data-y"),
-        $dataHeight = $("#data-height"),
-        $dataWidth = $("#data-width"),
+        $dataX = $("#dataX"),
+        $dataY = $("#dataY"),
+        $dataHeight = $("#dataHeight"),
+        $dataWidth = $("#dataWidth"),
+        $dataRotate = $("#dataRotate"),
         options = {
           aspectRatio: 16 / 9,
           data: {
@@ -25,6 +26,7 @@ $(function() {
             $dataY.val(data.y);
             $dataHeight.val(data.height);
             $dataWidth.val(data.width);
+            $dataRotate.val(data.rotate);
           }
         };
 
@@ -34,33 +36,18 @@ $(function() {
       },
       "built.cropper": function(e) {
         console.log(e.type);
-      },
-      "render.cropper": function(e) {
-        console.log(e.type);
       }
     });
 
-    $("#reset").click(function() {
-      $image.cropper("reset");
+    $(document).on("click", "[data-method]", function () {
+      var data = $(this).data();
+
+      data.method && $image.cropper(data.method, data.option);
     });
 
-    $("#reset-deep").click(function() {
-      $image.cropper("reset", true);
-    });
+    var $getDataInto = $("#getDataInto");
 
-    $("#release").click(function() {
-      $image.cropper("release");
-    });
-
-    $("#destroy").click(function() {
-      $image.cropper("destroy");
-    });
-
-    $("#free-ratio").click(function() {
-      $image.cropper("setAspectRatio", "auto");
-    });
-
-    $("#get-data").click(function() {
+    $("#getData").click(function() {
       var data = $image.cropper("getData"),
           val = "";
 
@@ -70,15 +57,16 @@ $(function() {
         console.log(data);
       }
 
-      $("#get-data-input").val(val);
+      $getDataInto.val(val);
     });
 
-    var $setDataX = $("#set-data-x"),
-        $setDataY = $("#set-data-y"),
-        $setDataWidth = $("#set-data-width"),
-        $setDataHeight = $("#set-data-height");
 
-    $("#set-data").click(function() {
+    var $setDataX = $("#setDataX"),
+        $setDataY = $("#setDataY"),
+        $setDataWidth = $("#setDataWidth"),
+        $setDataHeight = $("#setDataHeight");
+
+    $("#setData").click(function() {
       var data = {
             x: $setDataX.val(),
             y: $setDataY.val(),
@@ -89,21 +77,25 @@ $(function() {
       $image.cropper("setData", data);
     });
 
-    $("#set-aspect-ratio").click(function() {
-      var aspectRatio = $("#set-aspect-ratio-input").val();
 
-      $image.cropper("setAspectRatio", aspectRatio);
+    var $setAspectRatioWith = $("#setAspectRatioWith");
+
+    $("#setAspectRatio").click(function() {
+      $image.cropper("setAspectRatio", $setAspectRatioWith.val());
     });
 
-    $("#set-img-src").click(function() {
-      var cropper = $image.data("cropper"),
-          val = $("#set-img-src-input").val();
 
-      $image.cropper("setImgSrc", val);
+    var $replaceWith = $("#replaceWith");
+
+    $("#replace").click(function() {
+      $image.cropper("replace", $replaceWith.val());
     });
 
-    $("#get-img-info").click(function() {
-      var data = $image.cropper("getImgInfo"),
+
+    var $getImageDataInto = $("#getImageDataInto");
+
+    $("#getImageData").click(function() {
+      var data = $image.cropper("getImageData"),
           val = "";
 
       try {
@@ -112,7 +104,25 @@ $(function() {
         console.log(data);
       }
 
-      $("#get-img-info-input").val(val);
+      $getImageDataInto.val(val);
+    });
+
+
+    var $dataURLInto = $("#dataURLInto"),
+        $dataURLView = $("#dataURLView");
+
+    $("#getDataURL").click(function() {
+      var dataURL = $image.cropper("getDataURL");
+
+      $dataURLInto.text(dataURL);
+      $dataURLView.html('<img src="' + dataURL + '">');
+    });
+
+    $("#getDataURL2").click(function() {
+      var dataURL = $image.cropper("getDataURL", "image/jpeg");
+
+      $dataURLInto.text(dataURL);
+      $dataURLView.html('<img src="' + dataURL + '">');
     });
 
     $(".docs-options :radio").on("change", function (e) {
@@ -123,6 +133,8 @@ $(function() {
         $image.cropper("destroy").cropper(options);
       }
     });
+
+    $("[data-toggle='tooltip']").tooltip();
   }());
 
   // Sidebar
@@ -162,7 +174,7 @@ $(function() {
         }
       });
     }).on("hidden.bs.modal", function() {
-      originalData = $image.cropper("getData"); // Save the data on hide
+      originalData = $image.cropper("getData"); // Saves the data on hide
       $image.cropper("destroy");
     });
   }());

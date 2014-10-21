@@ -67,6 +67,45 @@
       <div class="col-md-9">
         <h3>Image:</h3>
         <div class="img-container"><img src="img/picture-1.jpg"></div>
+        <div class="docs-toolbar">
+          <div class="btn-group">
+            <button class="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In" type="button">
+              <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;zoom&quot;, 0.1)">
+                <span class="glyphicon glyphicon-zoom-in"></span>
+              </span>
+            </button>
+            <button class="btn btn-primary" data-method="zoom" data-option="-0.1" title="Zoom Out" type="button">
+              <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;zoom&quot;, -0.1)">
+                <span class="glyphicon glyphicon-zoom-out"></span>
+              </span>
+            </button>
+            <button class="btn btn-primary" data-method="rotate" data-option="-90" title="Rotate Left" type="button">
+              <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;rotate&quot;, -90)">
+                <span class="glyphicon glyphicon-share-alt docs-flip-horizontal"></span>
+              </span>
+            </button>
+            <button class="btn btn-primary" data-method="rotate" data-option="90" title="Rotate Right" type="button">
+              <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;rotate&quot;, 90)">
+                <span class="glyphicon glyphicon-share-alt"></span>
+              </span>
+            </button>
+            <button class="btn btn-primary" data-method="setDragMode" data-option="move" title="Move" type="button">
+              <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setDragMode&quot;, &quot;move&quot;)">
+                <span class="glyphicon glyphicon-move"></span>
+              </span>
+            </button>
+            <button class="btn btn-primary" data-method="setDragMode" data-option="crop" title="Crop" type="button">
+              <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setDragMode&quot;, &quot;crop&quot;)">
+                <span class="glyphicon glyphicon-plus"></span>
+              </span>
+            </button>
+            <button class="btn btn-primary" data-method="clear" title="Clear" type="button">
+              <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;clear&quot;)">
+                <span class="glyphicon glyphicon-remove"></span>
+              </span>
+            </button>
+          </div>
+        </div>
       </div>
       <div class="col-md-3">
         <h3>Preview:</h3>
@@ -82,27 +121,33 @@
         <h3>Data:</h3>
         <form class="form-horizontal" role="form">
           <div class="form-group">
-            <label for="data-x" class="col-xs-3 control-label">X:</label>
+            <label for="dataX" class="col-xs-3 control-label">X:</label>
             <div class="col-xs-9">
-              <input type="text" class="form-control" id="data-x" placeholder="x">
+              <input type="text" class="form-control" id="dataX" placeholder="x">
             </div>
           </div>
           <div class="form-group">
-            <label for="data-y" class="col-xs-3 control-label">Y:</label>
+            <label for="dataY" class="col-xs-3 control-label">Y:</label>
             <div class="col-xs-9">
-              <input type="text" class="form-control" id="data-y" placeholder="y">
+              <input type="text" class="form-control" id="dataY" placeholder="y">
             </div>
           </div>
           <div class="form-group">
-            <label for="data-width" class="col-xs-3 control-label">Width:</label>
+            <label for="dataWidth" class="col-xs-3 control-label">Width:</label>
             <div class="col-xs-9">
-              <input type="text" class="form-control" id="data-width" placeholder="width">
+              <input type="text" class="form-control" id="dataWidth" placeholder="width">
             </div>
           </div>
           <div class="form-group">
-            <label for="data-height" class="col-xs-3 control-label">Height:</label>
+            <label for="dataHeight" class="col-xs-3 control-label">Height:</label>
             <div class="col-xs-9">
-              <input type="text" class="form-control" id="data-height" placeholder="height">
+              <input type="text" class="form-control" id="dataHeight" placeholder="height">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="dataRotate" class="col-xs-3 control-label">Rotate:</label>
+            <div class="col-xs-9">
+              <input type="text" class="form-control" id="dataRotate" placeholder="rotate">
             </div>
           </div>
         </form>
@@ -113,62 +158,77 @@
         <div class="docs-btn-group">
           <h3>Methods:</h3>
           <div class="button-group">
-            <button class="btn btn-warning" id="reset" type="button">Reset</button>
-            <button class="btn btn-warning" id="reset-deep" type="button">Reset (deep)</button>
-            <button class="btn btn-primary" id="release" type="button">Release</button>
-            <button class="btn btn-danger" id="destroy" type="button">Destroy</button>
-            <button class="btn btn-info" id="free-ratio" type="button">Free Ratio</button>
-            <button class="btn btn-primary" id="set-data" type="button" title="Set with the following data">Set Data</button>
+            <button class="btn btn-warning" id="reset" data-method="reset" data-toggle="tooltip" title="$().cropper(&quot;reset&quot;)" type="button">Reset</button>
+            <button class="btn btn-warning" id="reset2" data-method="reset" data-option="true" data-toggle="tooltip" title="$().cropper(&quot;reset&quot;, true)" type="button">Reset (deep)</button>
+            <button class="btn btn-success" id="enable" data-method="enable" type="button">Enable</button>
+            <button class="btn btn-warning" id="disable" data-method="disable" type="button">Disable</button>
+            <button class="btn btn-primary" id="clear" data-method="clear" type="button">Clear</button>
+            <button class="btn btn-danger" id="destroy" data-method="destroy" type="button">Destroy</button>
+            <button class="btn btn-info" id="freeRatio" data-method="setAspectRatio" data-option="auto" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, &quot;auto&quot;)" type="button">Free Ratio</button>
+            <button class="btn btn-primary" id="setData" type="button" title="Set with the following data">Set Data</button>
           </div>
           <div class="row">
             <div class="col-xs-6 col-sm-3 col-md-3">
               <div class="input-group">
                 <span class="input-group-addon">X</span>
-                <input class="form-control" id="set-data-x" type="number" value="550">
+                <input class="form-control" id="setDataX" type="number" value="550">
               </div>
             </div>
             <div class="col-xs-6 col-sm-3 col-md-3">
               <div class="input-group">
                 <span class="input-group-addon">Y</span>
-                <input class="form-control" id="set-data-y" type="number" value="100">
+                <input class="form-control" id="setDataY" type="number" value="100">
               </div>
             </div>
             <div class="col-xs-6 col-sm-3 col-md-3">
               <div class="input-group">
                 <span class="input-group-addon">Width</span>
-                <input class="form-control" id="set-data-width" type="number" value="480">
+                <input class="form-control" id="setDataWidth" type="number" value="480">
               </div>
             </div>
             <div class="col-xs-6 col-sm-3 col-md-3">
               <div class="input-group">
                 <span class="input-group-addon">Height</span>
-                <input class="form-control" id="set-data-height" type="number" value="270">
+                <input class="form-control" id="setDataHeight" type="number" value="270">
               </div>
             </div>
           </div>
           <div class="input-group">
-            <input class="form-control" id="get-data-input" type="text" placeholder="The data object will be showed here">
             <span class="input-group-btn">
-              <button class="btn btn-info" id="get-data" type="button">Get Data</button>
+              <button class="btn btn-primary" id="replace" type="button">Replace</button>
             </span>
+            <input id="replaceWith" type="text" class="form-control" placeholder="Input image URL" value="img/picture-2.jpg">
           </div>
           <div class="input-group">
-            <input id="get-img-info-input" type="text" class="form-control" placeholder="The image information will be showed here">
             <span class="input-group-btn">
-              <button class="btn btn-info" id="get-img-info" type="button">Get Image Info</button>
+              <button class="btn btn-primary" id="setAspectRatio" type="button">Set Aspect Ratio</button>
             </span>
+            <input id="setAspectRatioWith" type="text" class="form-control" placeholder="Input aspect ratio" value="0.618">
           </div>
           <div class="input-group">
-            <input id="set-aspect-ratio-input" type="text" class="form-control" placeholder="Input the new aspect ratio here">
             <span class="input-group-btn">
-              <button class="btn btn-primary" id="set-aspect-ratio" type="button">Set Aspect Ratio</button>
+              <button class="btn btn-info" id="getData" type="button">Get Data</button>
             </span>
+            <input class="form-control" id="getDataInto" type="text">
           </div>
           <div class="input-group">
-            <input id="set-img-src-input" type="text" class="form-control" placeholder="Input the new image src here" value="img/picture-4.jpg">
             <span class="input-group-btn">
-              <button class="btn btn-primary" id="set-img-src" type="button">Set Image Src</button>
+              <button class="btn btn-info" id="getImageData" type="button">Get Image Data</button>
             </span>
+            <input id="getImageDataInto" type="text" class="form-control">
+          </div>
+
+          <div class="row docs-data-url">
+            <div class="col-sm-12">
+              <button class="btn btn-primary" id="getDataURL" data-toggle="tooltip" title="$().cropper(&quot;getDataURL&quot;)" type="button">Get Data URL</button>
+              <button class="btn btn-primary" id="getDataURL2" data-toggle="tooltip" title="$().cropper(&quot;getDataURL&quot;, &quot;image/jpeg&quot;)" type="button">Get Data URL (JPG)</button>
+            </div>
+            <div class="col-sm-6">
+              <textarea class="form-control" id="dataURLInto" rows="6"></textarea>
+            </div>
+            <div class="col-sm-6">
+              <div id="dataURLView"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -254,6 +314,32 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="col-xs-4 control-label">zoomable:</label>
+            <div class="col-xs-8">
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary active">
+                  <input type="radio" name="zoomable" id="zoomable1" value="true" checked> Yes
+                </label>
+                <label class="btn btn-primary">
+                  <input type="radio" name="zoomable" id="zoomable2" value="false"> No
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-xs-4 control-label">rotatable:</label>
+            <div class="col-xs-8">
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary active">
+                  <input type="radio" name="rotatable" id="rotatable1" value="true" checked> Yes
+                </label>
+                <label class="btn btn-primary">
+                  <input type="radio" name="rotatable" id="rotatable2" value="false"> No
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
             <label class="col-xs-4 control-label">multiple:</label>
             <div class="col-xs-8">
               <div class="btn-group" data-toggle="buttons">
@@ -281,10 +367,11 @@
 ...</pre>
       <p>Javascript:</p>
       <pre class="prettyprint">var $image = $(&quot;.img-container img&quot;),
-    $dataX = $(&quot;#data-x&quot;),
-    $dataY = $(&quot;#data-y&quot;),
-    $dataHeight = $(&quot;#data-height&quot;),
-    $dataWidth = $(&quot;#data-width&quot;);
+    $dataX = $(&quot;#dataX&quot;),
+    $dataY = $(&quot;#dataY&quot;),
+    $dataHeight = $(&quot;#dataHeight&quot;),
+    $dataWidth = $(&quot;#dataWidth&quot;),
+    $dataRotate = $(&quot;#dataRotate&quot;);
 
 $image.cropper({
   aspectRatio: 16 / 9,
@@ -300,6 +387,7 @@ $image.cropper({
     $dataY.val(data.y);
     $dataHeight.val(data.height);
     $dataWidth.val(data.width);
+    $dataRotate.val(data.rotate);
   }
 });
 
@@ -307,12 +395,6 @@ $image.cropper({
 
 $(&quot;#reset&quot;).click(function() {
   $image.cropper(&quot;reset&quot;);
-});
-
-...
-
-$(&quot;#free-ratio&quot;).click(function() {
-  $image.cropper(&quot;setAspectRatio&quot;, &quot;auto&quot;);
 });
 
 ...</pre>
@@ -324,10 +406,12 @@ $(&quot;#free-ratio&quot;).click(function() {
     <h1 class="page-header" id="features">Features</h1>
     <ul>
       <li>Supports touch</li>
-      <li>Supports setup</li>
+      <li>Supports zoom</li>
+      <li>Supports rotation</li>
+      <li>Supports canvas</li>
+      <li>Supports options</li>
       <li>Supports methods</li>
       <li>Supports events</li>
-      <li>Supports canvas</li>
       <li>Cross-browser support</li>
     </ul>
   </div>
@@ -348,28 +432,27 @@ $(&quot;#free-ratio&quot;).click(function() {
         <h2 class="page-header" id="usage">Usage</h2>
         <p>Initialize with <code>$.fn.cropper</code> method.</p>
         <p>HTML:</p>
-        <pre class="prettyprint">&lt;!-- Wrap the img with a block element --&gt;
-&lt;div&gt;
-  &lt;img class=&quot;cropper&quot; src=&quot;img/picture-1.jpg&quot;&gt;
+        <pre class="prettyprint">&lt;!-- Wrap the image with a block element --&gt;
+&lt;div class=&quot;container&quot;&gt;
+  &lt;img src=&quot;picture.jpg&quot;&gt;
 &lt;/div&gt;</pre>
         <p>Javascript:</p>
-        <pre class="prettyprint">$(&quot;.cropper&quot;).cropper({
+        <pre class="prettyprint">$(&quot;.container > img&quot;).cropper({
   aspectRatio: 1.618,
   done: function(data) {
-    console.log(data);
+    // Crop image with the result data.
   }
 });</pre>
         <div class="alert alert-warning">
           <p><strong>Notes:</strong></p>
-          <p>- Please use the cropper on visible images only. In other words, don't try to use the cropper on an image which is wrapped by a hidden element.</p>
-          <p>- The size of the cropper is based on the size of the wrapper of target image, so be sure to wrap the image with a block element.</p>
-          <p>- The cropper will be re-rendered automatically on the resize of window.</p>
-          <p>- The result data is based on the original image.</p>
+          <p>- The size of the cropper inherits from the size of the image's parent element, so be sure to wrap the image with a visible block element.</p>
+          <p>- The values of the result data was computed with the original size of the image, so you can use them to crop the image directly.</p>
         </div>
 
         <!-- Options -->
         <h2 class="page-header" id="options">Options</h2>
-        <p>Setup with <code>$(&quot;#target&quot;).cropper(options)</code>, or global setup with <code>$.fn.cropper.setDefaults(options)</code>.</p>
+        <p>You may set cropper options with <code>$().cropper(options)</code>.</p>
+        <p>If you want to change the global default options, You may use <code>$.fn.cropper.setDefaults(options)</code>.</p>
         <div class="table-responsive">
           <table class="table table-bordered table-striped">
             <thead>
@@ -385,24 +468,24 @@ $(&quot;#free-ratio&quot;).click(function() {
                 <td>aspectRatio</td>
                 <td>string / number</td>
                 <td><code>"auto"</code></td>
-                <td>The aspect ratio of the cropping zone (e.g., "2", "1.3", "0.5", etc.).<br>Just set it with "auto" to free ratio.</td>
+                <td>The aspect ratio of the cropping zone. <br>By default, the cropping zone is free ratio.</td>
               </tr>
               <tr>
                 <td>data</td>
                 <td>object</td>
                 <td><code>{}</code></td>
-                <td>This parameter object only supports four properties: "x", "y", "width" and "height". By default, the cropped zone will appear in the center of the image.</td>
+                <td>Only supports four properties: "x", "y", "width" and "height". By default, the cropping zone will appear in the center of the image.</td>
               </tr>
               <tr>
                 <td>done</td>
                 <td>function</td>
                 <td><code>function (data) {}</code></td>
-                <td>This function will be provided with the result object. It'll be executed when the cropping zone changes by a move, resize or crop.</td>
+                <td>This function will be executed when the cropping zone changes by a move, resize or crop.</td>
               </tr>
               <tr>
                 <td>preview</td>
                 <td>selector</td>
-                <td><code>undefined</code></td>
+                <td><code>""</code></td>
                 <td>A jquery selector, add extra elements for preview.</td>
               </tr>
               <tr>
@@ -421,7 +504,7 @@ $(&quot;#free-ratio&quot;).click(function() {
                 <td>dashed</td>
                 <td>boolean</td>
                 <td><code>true</code></td>
-                <td>Show (true) or hide (false) the dashed lines above the dragger.</td>
+                <td>Show (true) or hide (false) the dashed lines above the cropping zone.</td>
               </tr>
               <tr>
                 <td>autoCrop</td>
@@ -433,19 +516,31 @@ $(&quot;#free-ratio&quot;).click(function() {
                 <td>dragCrop</td>
                 <td>boolean</td>
                 <td><code>true</code></td>
-                <td>Enable this to allow the user to remove the current cropping zone and create a new one by dragging over the image.</td>
+                <td>Enable to remove the current cropping zone and create a new one by dragging over the image.</td>
               </tr>
               <tr>
                 <td>movable</td>
                 <td>boolean</td>
                 <td><code>true</code></td>
-                <td>Enable to allow the user to move the cropping zone.</td>
+                <td>Enable to move the cropping zone.</td>
               </tr>
               <tr>
                 <td>resizable</td>
                 <td>boolean</td>
                 <td><code>true</code></td>
-                <td>Enable to allow the user to resize the cropping zone.</td>
+                <td>Enable to resize the cropping zone.</td>
+              </tr>
+              <tr>
+                <td>zoomable</td>
+                <td>boolean</td>
+                <td><code>true</code></td>
+                <td>Enable to zoom the image.</td>
+              </tr>
+              <tr>
+                <td>rotatable</td>
+                <td>boolean</td>
+                <td><code>true</code></td>
+                <td>Enable to rotate the image.</td>
               </tr>
               <tr>
                 <td>minWidth</td>
@@ -474,31 +569,31 @@ $(&quot;#free-ratio&quot;).click(function() {
               <tr>
                 <td>build</td>
                 <td>function</td>
-                <td><code>undefined</code></td>
+                <td><code>null</code></td>
                 <td>An event handler of the "build.cropper" event.</td>
               </tr>
               <tr>
                 <td>built</td>
                 <td>function</td>
-                <td><code>undefined</code></td>
+                <td><code>null</code></td>
                 <td>An event handler of the "built.cropper" event.</td>
               </tr>
               <tr>
                 <td>dragstart</td>
                 <td>function</td>
-                <td><code>undefined</code></td>
+                <td><code>null</code></td>
                 <td>An event handler of the "dragstart.cropper" event.</td>
               </tr>
               <tr>
                 <td>dragmove</td>
                 <td>function</td>
-                <td><code>undefined</code></td>
+                <td><code>null</code></td>
                 <td>An event handler of the "dragmove.cropper" event.</td>
               </tr>
               <tr>
                 <td>dragend</td>
                 <td>function</td>
-                <td><code>undefined</code></td>
+                <td><code>null</code></td>
                 <td>An event handler of the "dragend.cropper" event.</td>
               </tr>
             </tbody>
@@ -507,51 +602,88 @@ $(&quot;#free-ratio&quot;).click(function() {
 
         <!-- Methods -->
         <h2 class="page-header" id="methods">Methods</h2>
+        <h4>zoom</h4>
+        <ul>
+          <li>Zoom the image.</li>
+          <li>Param: a number (positive number for zoom in, negative number for zoom out).</li>
+          <li>Usage: <code>$().cropper("zoom", 0.1)</code> or <code>$().cropper("zoom", -0.1)</code></li>
+        </ul>
+        <h4>rotate</h4>
+        <ul>
+          <li>Rotate the image.</li>
+          <li>Param: a number (positive number for rotate right, negative number for rotate left)..</li>
+          <li>Usage: <code>$().cropper("rotate", 180)</code> or <code>$().cropper("rotate", -180)</code></li>
+          <li>Note: Be sure the browser supports rotate (CSS3 transform) before call this method.</li>
+        </ul>
+        <h4>enable</h4>
+        <ul>
+          <li>Enable (unfreeze) the cropper</li>
+          <li>Usage: <code>$().cropper("enable")</code></li>
+        </ul>
+        <h4>disable</h4>
+        <ul>
+          <li>Disable (freeze) the cropper</li>
+          <li>Usage: <code>$().cropper("disable")</code></li>
+        </ul>
         <h4>reset</h4>
         <ul>
           <li>Reset the cropping zone to the start state.</li>
           <li>Add a <code>true</code> param to reset the cropping zone to the default state.</li>
-          <li>Usage: <code>$("#target").cropper("reset")</code> or <code>$("#target").cropper("reset", true)</code></li>
+          <li>Usage: <code>$().cropper("reset")</code> or <code>$().cropper("reset", true)</code></li>
         </ul>
-        <h4>release</h4>
+        <h4>clear</h4>
         <ul>
-          <li>Release the cropping zone.</li>
-          <li>Usage: <code>$("#target").cropper("release")</code>.</li>
+          <li>Clear the cropping zone.</li>
+          <li>Usage: <code>$().cropper("clear")</code>.</li>
+        </ul>
+        <h4>replace</h4>
+        <ul>
+          <li>Replace the image.</li>
+          <li>Usage: <code>$().cropper("replace", "example.jpg")</code>.</li>
         </ul>
         <h4>destroy</h4>
         <ul>
-          <li>Destroy the Cropper and remove the instance from the target image.</li>
-          <li>Usage: <code>$("#target").cropper("destroy")</code>.</li>
+          <li>Destroy the cropper and remove the instance from the image.</li>
+          <li>Usage: <code>$().cropper("destroy")</code>.</li>
         </ul>
         <h4>getData</h4>
         <ul>
-          <li>Get the current cropped zone data.</li>
-          <li>Usage: <code>$("#target").cropper("getData")</code>.</li>
+          <li>Get the cropped zone data.</li>
+          <li>Usage: <code>$().cropper("getData")</code>.</li>
         </ul>
         <h4>setData</h4>
         <ul>
-          <li>Reset the cropping zone with new data.</li>
-          <li>Param: an object containing "x1", "y1", "width" and "height".</li>
-          <li>Usage: <code>$("#target").cropper("setData", {width: 480, height: 270})</code>.</li>
-          <li>If you want to remove the current data, Just pass an empty object or null. Usage: <code>$("#target").cropper("setData", {})</code> or <code>$("#target").cropper("setData", null)</code>.</li>
+          <li>Reset the cropped zone with new data.</li>
+          <li>Param: an object containing "x1", "y1", "width", "height" and "rotate".</li>
+          <li>Usage: <code>$().cropper("setData", {width: 480, height: 270})</code>.</li>
+          <li><strong>Tip</strong>: If you want to remove the current data, just pass an empty object or <code>null</code>. For example: <code>$().cropper("setData", {})</code> or <code>$().cropper("setData", null)</code>.</li>
         </ul>
         <h4>setAspectRatio</h4>
         <ul>
-          <li>Enable to reset the aspect ratio after initialized.</li>
+          <li>Enable to reset the aspect ratio after built.</li>
           <li>Param: "auto" or a positive number ("auto" for free ratio).</li>
-          <li>Usage: <code>$("#target").cropper("setAspectRatio", 1.618)</code>.</li>
+          <li>Usage: <code>$().cropper("setAspectRatio", 1.618)</code>.</li>
         </ul>
-        <h4>setImgSrc</h4>
+        <h4>getImageData</h4>
         <ul>
-          <li>Change the src of the image if need.</li>
-          <li>Usage: <code>$("#target").cropper("setImgSrc", "example.jpg")</code>.</li>
-        </ul>
-        <h4>getImgInfo</h4>
-        <ul>
-          <li>Get an object containing image information, contains: "naturalWidth", "naturalHeight", "width", "height", "aspectRatio" and "ratio".</li>
+          <li>Get an object containing image data, contains: "naturalWidth", "naturalHeight", "width", "height", "aspectRatio", "ratio" and "rotate".</li>
           <li>The "aspectRatio" is the value of "naturalWidth / naturalHeight".</li>
           <li>The "ratio" is the value of "width / naturalWidth".</li>
-          <li>Usage: <code>$("#target").cropper("getImgInfo")</code>.</li>
+          <li>Usage: <code>$().cropper("getImageData")</code>.</li>
+        </ul>
+        <h4>setDragMode</h4>
+        <ul>
+          <li>Change the drag mode.</li>
+          <li>Params: "crop", "move" and "none".</li>
+          <li>Usage: <code>$().cropper("setDragMode", "crop")</code>.</li>
+          <li><strong>Tips</strong>: You can toggle the "crop" and "move" mode by double click on the image.</li>
+        </ul>
+        <h4>getDataURL</h4>
+        <ul>
+          <li>Get the data url of the cropped zone (Rotation is not supported).</li>
+          <li>Param: the same as <code>canvas.toDataURL</code>.</li>
+          <li>Usage: <code>$().cropper("getDataURL")</code> or <code>$().cropper("getDataURL", "image/jpeg")</code> or <code>$().cropper("getDataURL", "image/jpeg", 0.6)</code>.</li>
+          <li>Note: Be sure the browser supports canvas before call this method.</li>
         </ul>
 
         <!-- Events -->
