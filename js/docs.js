@@ -11,7 +11,6 @@ $(function() {
         $dataY = $("#dataY"),
         $dataHeight = $("#dataHeight"),
         $dataWidth = $("#dataWidth"),
-        $dataRotate = $("#dataRotate"),
         options = {
           aspectRatio: 16 / 9,
           data: {
@@ -26,7 +25,6 @@ $(function() {
             $dataY.val(data.y);
             $dataHeight.val(data.height);
             $dataWidth.val(data.width);
-            $dataRotate.val(data.rotate);
           }
         };
 
@@ -44,6 +42,21 @@ $(function() {
 
       data.method && $image.cropper(data.method, data.option);
     });
+
+
+    var $zoomWith = $("#zoomWith");
+
+    $("#zoom").click(function() {
+      $image.cropper("zoom", $zoomWith.val());
+    });
+
+
+    var $rotateWith = $("#rotateWith");
+
+    $("#rotate").click(function() {
+      $image.cropper("rotate", $rotateWith.val());
+    });
+
 
     var $getDataInto = $("#getDataInto");
 

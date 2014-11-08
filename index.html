@@ -140,11 +140,11 @@
             <input class="form-control" id="dataHeight" type="text" placeholder="height">
             <span class="input-group-addon">px</span>
           </div>
-          <div class="input-group">
+          <!-- <div class="input-group">
             <label class="input-group-addon" for="dataRotate">Rotate</label>
             <input class="form-control" id="dataRotate" type="text" placeholder="rotate">
             <span class="input-group-addon">deg</span>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -162,55 +162,94 @@
             <button class="btn btn-info" id="freeRatio" data-method="setAspectRatio" data-option="auto" data-toggle="tooltip" title="$().cropper(&quot;setAspectRatio&quot;, &quot;auto&quot;)" type="button">Free Ratio</button>
             <button class="btn btn-primary" id="setData" type="button" title="Set with the following data">Set Data</button>
           </div>
+
           <div class="row">
-            <div class="col-xs-6 col-sm-3 col-md-3">
+            <div class="col-sm-6 col-md-3">
               <div class="input-group">
                 <span class="input-group-addon">X</span>
                 <input class="form-control" id="setDataX" type="number" value="550">
+                <span class="input-group-addon">px</span>
               </div>
             </div>
-            <div class="col-xs-6 col-sm-3 col-md-3">
+            <div class="col-sm-6 col-md-3">
               <div class="input-group">
                 <span class="input-group-addon">Y</span>
                 <input class="form-control" id="setDataY" type="number" value="100">
+                <span class="input-group-addon">px</span>
               </div>
             </div>
-            <div class="col-xs-6 col-sm-3 col-md-3">
+            <div class="col-sm-6 col-md-3">
               <div class="input-group">
                 <span class="input-group-addon">Width</span>
                 <input class="form-control" id="setDataWidth" type="number" value="480">
+                <span class="input-group-addon">px</span>
               </div>
             </div>
-            <div class="col-xs-6 col-sm-3 col-md-3">
+            <div class="col-sm-6 col-md-3">
               <div class="input-group">
                 <span class="input-group-addon">Height</span>
                 <input class="form-control" id="setDataHeight" type="number" value="270">
+                <span class="input-group-addon">px</span>
               </div>
             </div>
           </div>
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button class="btn btn-primary" id="replace" type="button">Replace</button>
-            </span>
-            <input id="replaceWith" type="text" class="form-control" placeholder="Input image URL" value="img/picture-2.jpg">
+
+          <div class="row">
+            <div class="col-sm-6 col-md-6">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" id="zoom" type="button">Zoom</button>
+                </span>
+                <input class="form-control" id="zoomWith" type="number" value="0.5">
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" id="rotate" type="button">Rotate</button>
+                </span>
+                <input class="form-control" id="rotateWith" type="number" value="45">
+                <span class="input-group-addon">deg</span>
+              </div>
+            </div>
           </div>
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button class="btn btn-primary" id="setAspectRatio" type="button">Set Aspect Ratio</button>
-            </span>
-            <input id="setAspectRatioWith" type="text" class="form-control" placeholder="Input aspect ratio" value="0.618">
+
+          <div class="row">
+            <div class="col-sm-6 col-md-6">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" id="replace" type="button">Replace</button>
+                </span>
+                <input id="replaceWith" type="text" class="form-control" placeholder="Input image URL" value="img/picture-2.jpg">
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" id="setAspectRatio" type="button">Set Aspect Ratio</button>
+                </span>
+                <input id="setAspectRatioWith" type="text" class="form-control" placeholder="Input aspect ratio" value="0.618">
+              </div>
+            </div>
           </div>
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button class="btn btn-info" id="getData" type="button">Get Data</button>
-            </span>
-            <input class="form-control" id="getDataInto" type="text">
-          </div>
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button class="btn btn-info" id="getImageData" type="button">Get Image Data</button>
-            </span>
-            <input id="getImageDataInto" type="text" class="form-control">
+
+          <div class="row">
+            <div class="col-sm-6 col-md-6">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-info" id="getData" type="button">Get Data</button>
+                </span>
+                <input class="form-control" id="getDataInto" type="text">
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-info" id="getImageData" type="button">Get Image Data</button>
+                </span>
+                <input id="getImageDataInto" type="text" class="form-control">
+              </div>
+            </div>
           </div>
 
           <div class="row docs-data-url">
@@ -365,8 +404,7 @@
     $dataX = $(&quot;#dataX&quot;),
     $dataY = $(&quot;#dataY&quot;),
     $dataHeight = $(&quot;#dataHeight&quot;),
-    $dataWidth = $(&quot;#dataWidth&quot;),
-    $dataRotate = $(&quot;#dataRotate&quot;);
+    $dataWidth = $(&quot;#dataWidth&quot;);
 
 $image.cropper({
   aspectRatio: 16 / 9,
@@ -382,7 +420,6 @@ $image.cropper({
     $dataY.val(data.y);
     $dataHeight.val(data.height);
     $dataWidth.val(data.width);
-    $dataRotate.val(data.rotate);
   }
 });
 
@@ -605,10 +642,10 @@ $(&quot;#reset&quot;).click(function() {
         </ul>
         <h4>rotate</h4>
         <ul>
-          <li>Rotate the image.</li>
+          <li>Rotate the image (Replace the original image with a new rotated image which was generated by canvas)</li>
           <li>Param: a number (positive number for rotate right, negative number for rotate left)..</li>
           <li>Usage: <code>$().cropper("rotate", 180)</code> or <code>$().cropper("rotate", -180)</code></li>
-          <li>Note: Be sure the browser supports rotate (CSS3 transform) before call this method.</li>
+          <li>Note: Be sure the browser supports canvas before call this method.</li>
         </ul>
         <h4>enable</h4>
         <ul>
@@ -649,7 +686,7 @@ $(&quot;#reset&quot;).click(function() {
         <h4>setData</h4>
         <ul>
           <li>Reset the cropped zone with new data.</li>
-          <li>Param: an object containing "x1", "y1", "width", "height" and "rotate".</li>
+          <li>Param: an object containing "x1", "y1", "width", "height".</li>
           <li>Usage: <code>$().cropper("setData", {width: 480, height: 270})</code>.</li>
           <li><strong>Tip</strong>: If you want to remove the current data, just pass an empty object or <code>null</code>. For example: <code>$().cropper("setData", {})</code> or <code>$().cropper("setData", null)</code>.</li>
         </ul>
@@ -661,7 +698,7 @@ $(&quot;#reset&quot;).click(function() {
         </ul>
         <h4>getImageData</h4>
         <ul>
-          <li>Get an object containing image data, contains: "naturalWidth", "naturalHeight", "width", "height", "aspectRatio", "ratio" and "rotate".</li>
+          <li>Get an object containing image data, contains: "naturalWidth", "naturalHeight", "width", "height", "aspectRatio", "ratio".</li>
           <li>The "aspectRatio" is the value of "naturalWidth / naturalHeight".</li>
           <li>The "ratio" is the value of "width / naturalWidth".</li>
           <li>Usage: <code>$().cropper("getImageData")</code>.</li>
