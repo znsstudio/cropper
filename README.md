@@ -57,7 +57,7 @@ Include files:
 Initialize with `$.fn.cropper` method.
 
 ```html
-<!-- Wrap the image with a block element -->
+<!-- Wrap the image or canvas with a block element -->
 <div class="container">
   <img src="picture.jpg">
 </div>
@@ -95,8 +95,13 @@ By default, the cropping zone is free ratio.
 #### data
 
 - type: object
+- options: "x", "y", "width", "height"
 - default: {}
-- example:
+
+By default, the cropping zone will appear in the center of the image.
+If you already have values of the last crop and you want to apply them, just set them as option.
+
+For example:
 
 ```javascript
 {
@@ -106,14 +111,6 @@ By default, the cropping zone is free ratio.
   height: 270
 }
 ```
-
-Only support four properties: "x", "y", "width", "height".
-
-By default, the cropping zone will appear in the center of the image.
-If you already have values of the last crop and you want to apply them, just set them as option.
-
-**Tips:** It's possible to save the data in cookie or somewhere else and then re-render the cropper after a refresh the page using the data you have.
-
 
 #### done
 
@@ -343,7 +340,7 @@ An event handler of the "dragend.cropper" event.
 #### setData
 
 - Reset the cropped zone with new data.
-- Param: an object containing "x", "y", "width", "height".
+- Param: an object containing: "x", "y", "width", "height".
 - Use with `$().cropper("setData", {width: 480, height: 270})`.
 
 **Tip:** If you want to remove the current data, just pass an empty object or `null`. For example: `$().cropper("setData", {})` or `$().cropper("setData", null)`.
