@@ -40,9 +40,37 @@ $(function() {
     $(document).on("click", "[data-method]", function () {
       var data = $(this).data();
 
-      data.method && $image.cropper(data.method, data.option);
+      if (data.method) {
+        $image.cropper(data.method, data.option);
+      }
     });
 
+    var $inputImage = $("#inputImage");
+
+    if (window.FileReader) {
+      $inputImage.change(function() {
+        var fileReader = new FileReader(),
+            files = this.files,
+            file;
+
+        if (files.length) {
+          file = files[0];
+
+          if (/^image\/\w+$/.test(file.type)) {
+            fileReader.readAsDataURL(file);
+            fileReader.onload = function () {
+              $image.cropper("reset", true).cropper("replace", this.result);
+            };
+          }
+        }
+      });
+    } else {
+      $inputImage.addClass("hide");
+    }
+
+    $("#download").click(function() {
+      window.open($image.cropper("getDataURL"));
+    });
 
     var $zoomWith = $("#zoomWith");
 
@@ -173,22 +201,32 @@ $(function() {
   // Examples
   // -------------------------------------------------------------------------
 
-  (function() {
-    var $modal = $("#bootstrap-modal"),
-        $image = $modal.find(".bootstrap-modal-cropper img"),
-        originalData = {};
+  // Example 1
+  $(".fixed-cropbox-cropper > img").cropper({
+    aspectRatio: 640 / 320, // 2 / 1
+    autoCropArea: 0.6, // Center 60%
+    multiple: false,
+    dragCrop: false,
+    dashed: false,
+    movable: false,
+    resizable: false
+  });
 
-    $modal.on("shown.bs.modal", function() {
-      $image.cropper({
-        multiple: true,
-        data: originalData,
-        done: function(data) {
-          console.log(data);
-        }
-      });
-    }).on("hidden.bs.modal", function() {
-      originalData = $image.cropper("getData"); // Saves the data on hide
-      $image.cropper("destroy");
+
+  // Example 2
+  var $image = $modal.find(".bootstrap-modal-cropper > img"),
+      originalData = {};
+
+  $("#bootstrap-modal").on("shown.bs.modal", function() {
+    $image.cropper({
+      multiple: true,
+      data: originalData,
+      done: function(data) {
+        console.log(data);
+      }
     });
-  }());
+  }).on("hidden.bs.modal", function() {
+    originalData = $image.cropper("getData"); // Saves the data on hide
+    $image.cropper("destroy");
+  });
 });

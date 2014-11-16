@@ -188,6 +188,17 @@ code {
   background-color: #fcfcfc;
 }
 
+/* Examples
+ * -------------------------------------------------------------------------- */
+.fixed-cropbox-cropper {
+  max-height: 298px;
+  overflow: hidden;
+}
+
+.fixed-cropbox-cropper > img {
+  width: 100%;
+}
+
 /* Google code prettify
  * -------------------------------------------------------------------------- */
 pre.prettyprint {

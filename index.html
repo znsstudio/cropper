@@ -104,6 +104,17 @@
                 <span class="glyphicon glyphicon-remove"></span>
               </span>
             </button>
+            <label class="btn btn-primary" for="inputImage" title="Upload image file">
+              <input class="hide" id="inputImage" name="file" type="file" accept="image/*">
+              <span class="docs-tooltip" data-toggle="tooltip" title="Import image with FileReader">
+                <span class="glyphicon glyphicon-upload"></span>
+              </span>
+            </label>
+            <button class="btn btn-primary" id="download" type="button" title="Download cropped image">
+              <span class="docs-tooltip" data-toggle="tooltip" title="Export image with &quot;getDataURL&quot;">
+                <span class="glyphicon glyphicon-download"></span>
+              </span>
+            </button>
           </div>
         </div>
       </div>
@@ -469,7 +480,7 @@ $(&quot;#reset&quot;).click(function() {
   &lt;img src=&quot;picture.jpg&quot;&gt;
 &lt;/div&gt;</pre>
         <p>Javascript:</p>
-        <pre class="prettyprint" container quot> img&quot;).cropper({
+        <pre class="prettyprint">$(&quot;.container &gt; img&quot;).cropper({
   aspectRatio: 1.618,
   done: function(data) {
     // Crop image with the result data.
@@ -543,6 +554,12 @@ $(&quot;#reset&quot;).click(function() {
                 <td>boolean</td>
                 <td><code>true</code></td>
                 <td>Render the cropping zone automatically when initialize.</td>
+              </tr>
+              <tr>
+                <td>autoCropArea</td>
+                <td>number</td>
+                <td><code>0.8</code></td>
+                <td>A number between 0 and 1. Define the automatic cropping area size (percentage).</td>
               </tr>
               <tr>
                 <td>dragCrop</td>
@@ -750,21 +767,75 @@ $(&quot;#reset&quot;).click(function() {
   <!-- Examples -->
   <div class="container docs-examples">
     <h1 class="page-header" id="examples">Examples</h1>
-    <h3>Cropper in a Bootstrap modal</h3>
-    <p>HTML:</p>
-    <pre class="prettyprint">&lt;div class=&quot;modal&quot; id=&quot;bootstrap-modal&quot;&gt;
-  ...
-  &lt;div class=&quot;modal-body&quot;&gt;
-    &lt;div class=&quot;bootstrap-modal-cropper&quot;&gt;&lt;img src=&quot;img/picture-1.jpg&quot;&gt;&lt;/div&gt;
-  &lt;/div&gt;
-  ...
+    <h3>Cropper with fixed crop-box.</h3>
+    <div class="row">
+      <div class="col-sm-6">
+        <p>Demo:</p>
+        <div class="fixed-cropbox-cropper" data-toggle="tooltip" title="Zoom in and move it">
+          <img src="img/picture-1.jpg" alt="Picture">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <p>HTML:</p>
+        <pre class="prettyprint">&lt;div class=&quot;fixed-cropbox-cropper&quot;&gt;
+  &lt;img src=&quot;img/picture-1.jpg&quot;&gt;
 &lt;/div&gt;</pre>
-    <p>JavaScript:</p>
-    <pre class="prettyprint">var $modal = $(&quot;#bootstrap-modal&quot;),
-    $image = $modal.find(&quot;.bootstrap-modal-cropper img&quot;),
+        <p>JavaScript:</p>
+        <pre class="prettyprint">$(&quot;.fixed-cropbox-cropper &gt; img&quot;).cropper({
+  aspectRatio: 640 / 320,
+  autoCropArea: 0.6, // Center 60%
+  multiple: false,
+  dragCrop: false,
+  dashed: false,
+  movable: false,
+  resizable: false
+});</pre>
+      </div>
+    </div>
+
+    <br>
+
+    <h3>Cropper in a Bootstrap modal</h3>
+    <div class="row">
+      <div class="col-sm-6">
+        <p>HTML:</p>
+        <pre class="prettyprint">&lt;div class=&quot;modal&quot; id=&quot;bootstrap-modal&quot;&gt;
+  &lt;div class=&quot;modal-dialog&quot;&gt;
+    ...
+    &lt;div class=&quot;modal-body&quot;&gt;
+      &lt;div class=&quot;bootstrap-modal-cropper&quot;&gt;
+        &lt;img src=&quot;img/picture-1.jpg&quot;&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    ...
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+        <p>Demo:</p>
+        <p><button class="btn btn-primary" data-target="#bootstrap-modal" data-toggle="modal" type="button">Launch the demo</button></p>
+        <div class="modal fade" id="bootstrap-modal" aria-hidden="true" aria-labelledby="bootstrap-modal-label" role="dialog" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button class="close" data-dismiss="modal" type="button" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="bootstrap-modal-label">Cropper</h4>
+              </div>
+              <div class="modal-body">
+                <div class="bootstrap-modal-cropper"><img src="img/picture-1.jpg" alt="Picture"></div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <p>JavaScript:</p>
+        <pre class="prettyprint">var $image = $modal.find(&quot;.bootstrap-modal-cropper &gt; img&quot;),
     originalData = {};
 
-$modal.on(&quot;shown.bs.modal&quot;, function() {
+$(&quot;#bootstrap-modal&quot;).on(&quot;shown.bs.modal&quot;, function() {
   $image.cropper({
     multiple: true,
     data: originalData,
@@ -777,26 +848,11 @@ $modal.on(&quot;shown.bs.modal&quot;, function() {
   $image.cropper(&quot;destroy&quot;);
 });
 </pre>
-    <p>Demo:</p>
-    <p><button class="btn btn-primary" data-target="#bootstrap-modal" data-toggle="modal" type="button">Launch the demo</button></p>
-    <div class="modal fade" id="bootstrap-modal" aria-hidden="true" aria-labelledby="bootstrap-modal-label" role="dialog" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button class="close" data-dismiss="modal" type="button" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="bootstrap-modal-label">Cropper</h4>
-          </div>
-          <div class="modal-body">
-            <div class="bootstrap-modal-cropper"><img src="img/picture-1.jpg" alt="Picture 1"></div>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
-          </div>
-        </div>
       </div>
     </div>
 
     <br>
+
     <h3>Crop avatar <small>A complete example</small></h3>
     <p>This example require a <strong>PHP</strong> server, please download and test it.</p>
     <p>
