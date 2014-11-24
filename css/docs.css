@@ -79,7 +79,7 @@
 }
 
 .docs-data-url img {
-  max-height: 134px;
+  max-height: 174px;
 }
 
 .docs-flip-horizontal {
@@ -191,7 +191,7 @@ code {
 /* Examples
  * -------------------------------------------------------------------------- */
 .fixed-cropbox-cropper {
-  max-height: 298px;
+  max-height: 354px;
   overflow: hidden;
 }
 

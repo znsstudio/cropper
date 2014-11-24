@@ -166,6 +166,26 @@ $(function() {
       $dataURLView.html('<img src="' + dataURL + '">');
     });
 
+    $("#getDataURL3").click(function() {
+      var dataURL = $image.cropper("getDataURL", {
+            width: 160,
+            height: 90
+          });
+
+      $dataURLInto.text(dataURL);
+      $dataURLView.html('<img src="' + dataURL + '">');
+    });
+
+    $("#getDataURL4").click(function() {
+      var dataURL = $image.cropper("getDataURL", {
+            width: 320,
+            height: 180
+          }, "image/jpeg", 0.8);
+
+      $dataURLInto.text(dataURL);
+      $dataURLView.html('<img src="' + dataURL + '">');
+    });
+
     $(".docs-options :radio").on("change", function (e) {
       var $this = $(this);
 
@@ -209,12 +229,15 @@ $(function() {
     dragCrop: false,
     dashed: false,
     movable: false,
-    resizable: false
+    resizable: false,
+    built: function () {
+      $(this).cropper("zoom", 0.5);
+    }
   });
 
 
   // Example 2
-  var $image = $modal.find(".bootstrap-modal-cropper > img"),
+  var $image = $(".bootstrap-modal-cropper > img"),
       originalData = {};
 
   $("#bootstrap-modal").on("shown.bs.modal", function() {

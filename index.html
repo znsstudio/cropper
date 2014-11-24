@@ -267,9 +267,11 @@
             <div class="col-sm-12">
               <button class="btn btn-primary" id="getDataURL" data-toggle="tooltip" type="button" title="$().cropper(&quot;getDataURL&quot;)">Get Data URL</button>
               <button class="btn btn-primary" id="getDataURL2" data-toggle="tooltip" type="button" title="$().cropper(&quot;getDataURL&quot;, &quot;image/jpeg&quot;)">Get Data URL (JPG)</button>
+              <button class="btn btn-primary" id="getDataURL3" data-toggle="tooltip" type="button" title="$().cropper(&quot;getDataURL&quot;, {width: 160, height: 90})">Get Data URL (160*90)</button>
+              <button class="btn btn-primary" id="getDataURL4" data-toggle="tooltip" type="button" title="$().cropper(&quot;getDataURL&quot;, {width: 320, height: 180}, &quot;image/jpeg&quot;, 0.8)">Get Data URL (320*180, JPG, 0.8)</button>
             </div>
             <div class="col-sm-6">
-              <textarea class="form-control" id="dataURLInto" rows="6"></textarea>
+              <textarea class="form-control" id="dataURLInto" rows="8"></textarea>
             </div>
             <div class="col-sm-6">
               <div id="dataURLView"></div>
@@ -771,13 +773,13 @@ $(&quot;#reset&quot;).click(function() {
     <h1 class="page-header" id="examples">Examples</h1>
     <h3>Cropper with fixed crop-box.</h3>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-7">
         <p>Demo:</p>
-        <div class="fixed-cropbox-cropper" data-toggle="tooltip" title="Zoom in by mouse wheel and move it">
+        <div class="fixed-cropbox-cropper">
           <img src="img/picture-1.jpg" alt="Picture">
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-5">
         <p>HTML:</p>
         <pre class="prettyprint">&lt;div class=&quot;fixed-cropbox-cropper&quot;&gt;
   &lt;img src=&quot;img/picture-1.jpg&quot;&gt;
@@ -790,7 +792,10 @@ $(&quot;#reset&quot;).click(function() {
   dragCrop: false,
   dashed: false,
   movable: false,
-  resizable: false
+  resizable: false,
+  built: function () {
+    $(this).cropper(&quot;zoom&quot;, 0.5);
+  }
 });</pre>
       </div>
     </div>
