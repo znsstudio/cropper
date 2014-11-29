@@ -110,11 +110,11 @@
                 <span class="glyphicon glyphicon-upload"></span>
               </span>
             </label>
-            <button class="btn btn-primary" id="download" type="button" title="Download cropped image">
+            <!-- <button class="btn btn-primary" id="download" type="button" title="Download cropped image">
               <span class="docs-tooltip" data-toggle="tooltip" title="Export image with &quot;getDataURL&quot;">
                 <span class="glyphicon glyphicon-download"></span>
               </span>
-            </button>
+            </button> -->
           </div>
         </div>
       </div>
@@ -771,21 +771,21 @@ $(&quot;#reset&quot;).click(function() {
   <!-- Examples -->
   <div class="container docs-examples">
     <h1 class="page-header" id="examples">Examples</h1>
-    <h3>Cropper with fixed crop-box.</h3>
+    <h3>Cropper with fixed dragger.</h3>
     <div class="row">
       <div class="col-sm-7">
         <p>Demo:</p>
-        <div class="fixed-cropbox-cropper">
+        <div class="fixed-dragger-cropper">
           <img src="img/picture-1.jpg" alt="Picture">
         </div>
       </div>
       <div class="col-sm-5">
         <p>HTML:</p>
-        <pre class="prettyprint">&lt;div class=&quot;fixed-cropbox-cropper&quot;&gt;
+        <pre class="prettyprint">&lt;div class=&quot;fixed-dragger-cropper&quot;&gt;
   &lt;img src=&quot;img/picture-1.jpg&quot;&gt;
 &lt;/div&gt;</pre>
         <p>JavaScript:</p>
-        <pre class="prettyprint">$(&quot;.fixed-cropbox-cropper &gt; img&quot;).cropper({
+        <pre class="prettyprint">$(&quot;.fixed-dragger-cropper &gt; img&quot;).cropper({
   aspectRatio: 640 / 320,
   autoCropArea: 0.6, // Center 60%
   multiple: false,
@@ -880,6 +880,9 @@ $(&quot;#bootstrap-modal&quot;).on(&quot;shown.bs.modal&quot;, function() {
       </div>
     </div>
   </footer>
+
+  <!-- Alert -->
+  <div class="docs-alert"><span class="warning message"></span></div>
 
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

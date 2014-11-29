@@ -1,6 +1,17 @@
 $(function() {
 
-  var console = window.console || {log: function () {}};
+  var console = window.console || {log: function () {}},
+      $alert = $(".docs-alert"),
+      $message = $alert.find(".message"),
+      showMessage = function (message, type) {
+        $message.text(message);
+        type && $message.addClass(type);
+        $alert.fadeIn();
+
+        setTimeout(function () {
+          $alert.fadeOut();
+        }, 3000);
+      };
 
   // Overview
   // -------------------------------------------------------------------------
@@ -53,15 +64,20 @@ $(function() {
             files = this.files,
             file;
 
-        if (files.length) {
-          file = files[0];
+        if (!files.length) {
+          return;
+        }
 
-          if (/^image\/\w+$/.test(file.type)) {
-            fileReader.readAsDataURL(file);
-            fileReader.onload = function () {
-              $image.cropper("reset", true).cropper("replace", this.result);
-            };
-          }
+        file = files[0];
+
+        if (/^image\/\w+$/.test(file.type)) {
+          fileReader.readAsDataURL(file);
+          fileReader.onload = function () {
+            $inputImage.val("");
+            $image.cropper("reset", true).cropper("replace", this.result);
+          };
+        } else {
+          showMessage("Please choose an image file.");
         }
       });
     } else {
@@ -222,7 +238,7 @@ $(function() {
   // -------------------------------------------------------------------------
 
   // Example 1
-  $(".fixed-cropbox-cropper > img").cropper({
+  $(".fixed-dragger-cropper > img").cropper({
     aspectRatio: 640 / 320, // 2 / 1
     autoCropArea: 0.6, // Center 60%
     multiple: false,
