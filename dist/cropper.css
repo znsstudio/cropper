@@ -1,5 +1,5 @@
 /*!
- * Cropper v0.7.4
+ * Cropper v0.7.5
  * https://github.com/fengyuanchen/cropper
  *
  * Copyright 2014 Fengyuan Chen
@@ -20,8 +20,10 @@
 
 .cropper-container img {
   width: 100%;
+  min-width: 0 !important;
   max-width: none !important;
   height: 100%;
+  min-height: 0 !important;
   max-height: none !important;
 }
 
