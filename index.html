@@ -11,10 +11,17 @@
   <link href="apple-touch-icon-precomposed.png" rel="apple-touch-icon-precomposed">
   <link href="favicon.ico" rel="shortcut icon">
   <link href="favicon.ico" rel="icon">
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-  <link href="//fengyuanchen.github.io/assets/css/prettify.css" rel="stylesheet">
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://fengyuanchen.github.io/assets/css/prettify.css" rel="stylesheet">
   <link href="dist/cropper.min.css" rel="stylesheet">
   <link href="css/docs.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 </head>
 <body>
   <!-- header -->
@@ -429,10 +436,10 @@ $image.cropper({
   },
   preview: &quot;.img-preview&quot;,
   done: function(data) {
-    $dataX.val(data.x);
-    $dataY.val(data.y);
-    $dataHeight.val(data.height);
-    $dataWidth.val(data.width);
+    $dataX.val(Math.round(data.x));
+    $dataY.val(Math.round(data.y));
+    $dataHeight.val(Math.round(data.height));
+    $dataWidth.val(Math.round(data.width));
   }
 });
 
@@ -705,8 +712,8 @@ $(&quot;#reset&quot;).click(function() {
         </ul>
         <h4>getData</h4>
         <ul>
-          <li>Get the cropped zone data.</li>
-          <li>Usage: <code>$().cropper("getData")</code>.</li>
+          <li>Get the cropped zone data. Add a <code>true</code> parameter to get rounded data.</li>
+          <li>Usage: <code>$().cropper("getData")</code> or <code>$().cropper("getData", true)</code>.</li>
         </ul>
         <h4>setData</h4>
         <ul>
@@ -890,10 +897,10 @@ $(&quot;#bootstrap-modal&quot;).on(&quot;shown.bs.modal&quot;, function() {
   <!-- Alert -->
   <div class="docs-alert"><span class="warning message"></span></div>
 
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <script src="//fengyuanchen.github.io/assets/js/prettify.js"></script>
-  <script src="//fengyuanchen.github.io/assets/js/main.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="http://fengyuanchen.github.io/assets/js/prettify.js"></script>
+  <script src="http://fengyuanchen.github.io/assets/js/main.js"></script>
   <script src="dist/cropper.min.js"></script>
   <script src="js/docs.js"></script>
 </body>

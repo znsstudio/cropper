@@ -32,10 +32,10 @@ $(function() {
           },
           preview: ".img-preview",
           done: function(data) {
-            $dataX.val(data.x);
-            $dataY.val(data.y);
-            $dataHeight.val(data.height);
-            $dataWidth.val(data.width);
+            $dataX.val(Math.round(data.x));
+            $dataY.val(Math.round(data.y));
+            $dataHeight.val(Math.round(data.height));
+            $dataWidth.val(Math.round(data.width));
           }
         };
 
@@ -73,8 +73,8 @@ $(function() {
         if (/^image\/\w+$/.test(file.type)) {
           fileReader.readAsDataURL(file);
           fileReader.onload = function () {
-            $inputImage.val("");
             $image.cropper("reset", true).cropper("replace", this.result);
+            $inputImage.val("");
           };
         } else {
           showMessage("Please choose an image file.");
