@@ -1,8 +1,8 @@
 /*!
- * Cropper v0.7.6
+ * Cropper v0.7.7
  * https://github.com/fengyuanchen/cropper
  *
- * Copyright 2014 Fengyuan Chen
+ * Copyright 2014-2015 Fengyuan Chen
  * Released under the MIT license
  */
 
@@ -83,6 +83,12 @@
         return function () {
           return fn.apply(context, args.concat(toArray(arguments)));
         };
+      },
+
+      addTimestamp = function (url) {
+        var timestamp = "timestamp=" + (new Date()).getTime();
+
+        return (url + (url.indexOf("?") === -1 ? "?" : "&") + timestamp);
       },
 
       // Constructor
@@ -178,6 +184,7 @@
       if (this.defaults.checkImageOrigin) {
         if ($this.prop("crossOrigin") || this.isCrossOriginURL(url)) {
           crossOrigin = " crossOrigin";
+          url = addTimestamp(url); // Bust cache (#119, #148)
         }
       }
 
@@ -256,7 +263,6 @@
       this.$viewer = $cropper.find(".cropper-viewer");
 
       defaults.autoCrop ? (this.cropped = TRUE) : this.$dragger.addClass(CLASS_HIDDEN);
-      defaults.dragCrop && this.setDragMode("crop");
       defaults.modal && this.$canvas.addClass(CLASS_MODAL);
       !defaults.dashed && this.$dragger.find(".cropper-dashed").addClass(CLASS_HIDDEN);
       !defaults.movable && this.$dragger.find(".cropper-face").data(STRING_DIRECTIVE, "move");
@@ -266,6 +272,7 @@
       this.initPreview();
 
       this.built = TRUE; // Set `true` before update
+      defaults.dragCrop && this.setDragMode("crop"); // Set after built
       this.update();
       this.replaced = FALSE; // Reset to `false` after update
 
@@ -487,6 +494,7 @@
           // If not set, use the original aspect ratio of the image.
           aspectRatio = defaults.aspectRatio || this.image.aspectRatio,
           ratio = this.image.ratio,
+          autoCropDragger,
           dragger;
 
       if (((cropper.height * aspectRatio) - cropper.width) >= 0) {
@@ -540,15 +548,18 @@
       dragger.minHeight = min(dragger.maxHeight, dragger.minHeight);
 
       // Center the dragger by default
-      dragger.height *= defaults.autoCropArea;
-      dragger.width *= defaults.autoCropArea;
-      dragger.left = (cropper.width - dragger.width) / 2;
-      dragger.top = (cropper.height - dragger.height) / 2;
-      dragger.oldLeft = dragger.left;
-      dragger.oldTop = dragger.top;
+      autoCropDragger = $.extend({}, dragger);
+      autoCropDragger.height = dragger.height * defaults.autoCropArea;
+      autoCropDragger.width = dragger.width * defaults.autoCropArea;
+      autoCropDragger.left = (cropper.width - autoCropDragger.width) / 2;
+      autoCropDragger.top = (cropper.height - autoCropDragger.height) / 2;
 
-      this.defaultDragger = dragger;
-      this.dragger = $.extend({}, dragger);
+      autoCropDragger.oldLeft = dragger.oldLeft = dragger.left;
+      autoCropDragger.oldTop = dragger.oldTop = dragger.top;
+
+      this.autoCropDragger = autoCropDragger;
+      this.defaultDragger = $.extend({}, dragger);
+      this.dragger = dragger;
     },
 
     renderDragger: function () {
@@ -681,7 +692,7 @@
       }
 
       if (data === NULL || $.isEmptyObject(data)) {
-        dragger = $.extend({}, this.defaultDragger);
+        dragger = $.extend({}, this.autoCropDragger);
       }
 
       if ($.isPlainObject(data) && !$.isEmptyObject(data)) {
