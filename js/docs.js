@@ -81,7 +81,7 @@ $(function() {
         }
       });
     } else {
-      $inputImage.addClass("hide");
+      $inputImage.parent().remove();
     }
 
     $("#download").click(function() {
