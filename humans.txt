@@ -7,7 +7,7 @@
 
 # THANKS
 
-    Bootstrap, jQuery, Github Pages
+    Bootstrap, jQuery, Github Pages, Google Analytics
 
 # TECHNOLOGY COLOPHON
 
