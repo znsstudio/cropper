@@ -14,6 +14,7 @@ $(function () {
 
   (function () {
     var $image = $('.img-container > img');
+    var $download = $('#download');
     var $dataX = $('#dataX');
     var $dataY = $('#dataY');
     var $dataHeight = $('#dataHeight');
@@ -60,17 +61,34 @@ $(function () {
     }).cropper(options);
 
 
+    // Buttons
+    if (!$.isFunction(document.createElement('canvas').getContext)) {
+      $('button[data-method="getCroppedCanvas"]').prop('disabled', true);
+    }
+
+    if (typeof document.createElement('cropper').style.transition === 'undefined') {
+      $('button[data-method="rotate"]').prop('disabled', true);
+      $('button[data-method="scale"]').prop('disabled', true);
+    }
+
+
+    // Download
+    if (typeof $download[0].download === 'undefined') {
+      $download.addClass('disabled');
+    }
+
+
     // Methods
-    $(document.body).on('click', '[data-method]', function () {
+    $body.on('click', '[data-method]', function () {
       var data = $(this).data();
       var $target;
       var result;
 
-      if (!$image.data('cropper')) {
+      if ($this.prop('disabled') || $this.hasClass('disabled')) {
         return;
       }
 
-      if (data.method) {
+      if ($image.data('cropper') && data.method) {
         data = $.extend({}, data); // Clone a new one
 
         if (typeof data.target !== 'undefined') {
@@ -95,8 +113,12 @@ $(function () {
           $(this).data('secondOption', -data.secondOption);
         }
 
-        if (data.method === 'getCroppedCanvas') {
+        if (data.method === 'getCroppedCanvas' && result) {
           $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
+
+          if (!$download.hasClass('disabled')) {
+            $download.attr('href', result.toDataURL());
+          }
         }
 
         if ($.isPlainObject(result) && $target) {
@@ -172,7 +194,7 @@ $(function () {
         }
       });
     } else {
-      $inputImage.parent().remove();
+      $inputImage.prop('disabled', true).parent().addClass('disabled');
     }
 
 
