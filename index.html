@@ -117,7 +117,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row docs-actions">
       <div class="col-md-9 docs-buttons">
         <!-- <h3 class="page-header">Toolbar:</h3> -->
         <div class="btn-group">
@@ -275,18 +275,11 @@
           </div>
         </div><!-- /.modal -->
 
-        <div class="btn-group">
-          <button type="button" class="btn btn-primary" data-method="getData" data-option data-target="#putData">
-            <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getData&quot;)">
-              Get Data
-            </span>
-          </button>
-          <button type="button" class="btn btn-primary btn-toggle" data-target="#diagram" data-toggle="modal">
-            <span class="docs-tooltip" data-toggle="tooltip" title="View diagram of data properties">
-              <span class="icon icon-info"></span>
-            </span>
-          </button>
-        </div>
+        <button type="button" class="btn btn-primary" data-method="getData" data-option data-target="#putData">
+          <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;getData&quot;)">
+            Get Data
+          </span>
+        </button>
         <button type="button" class="btn btn-primary" data-method="setData" data-target="#putData">
           <span class="docs-tooltip" data-toggle="tooltip" title="$().cropper(&quot;setData&quot;, data)">
             Set Data
@@ -323,25 +316,6 @@
           </span>
         </button>
         <input type="text" class="form-control" id="putData" placeholder="Get data to here or set data with this value">
-
-        <!-- Show the diagram in modal -->
-        <div class="modal fade docs-diagram" id="diagram" aria-hidden="true" aria-labelledby="diagramTitle" role="dialog" tabindex="-1">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="diagramTitle">Diagram of data's properties</h4>
-              </div>
-              <div class="modal-body">
-                <img class="img-responsive" src="img/data.jpg" alt="a schematic diagram of data's properties">
-              </div>
-              <!-- <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-              </div> -->
-            </div>
-          </div>
-        </div><!-- /.modal -->
-
       </div><!-- /.docs-buttons -->
 
       <div class="col-md-3 docs-toggles">
@@ -505,6 +479,8 @@
         </div><!-- /.dropdown -->
 
         <button type="button" class="btn btn-primary btn-block" id="toggle-sources" data-target="#sources" data-toggle="collapse" aria-expanded="true">Toggle Sources</button>
+
+        <a class="btn btn-default btn-block" href="http://fengyuanchen.github.io/cropperjs/" data-toggle="tooltip" target="_blank" title="JavaScript image cropper.">Go to CropperJS</a>
 
       </div><!-- /.docs-toggles -->
 
@@ -679,7 +655,8 @@ $('#cropper-example-2-modal').on('shown.bs.modal', function () {
 $image.cropper({
   movable: false,
   zoomable: false,
-  rotatable: false
+  rotatable: false,
+  scalable: false
 });
 
 $('#replace-toggle').click(function () {
