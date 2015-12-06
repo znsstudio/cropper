@@ -3,13 +3,13 @@
 
 # TEAM
 
-    Cropper
+    Fengyuan Chen
 
 # THANKS
 
-    Bootstrap, jQuery, Github Pages, Google Analytics
+    Github Pages, Google Analytics
 
 # TECHNOLOGY COLOPHON
 
-    HTML5, CSS3
-    jQuery, Bootstrap, Font Awesome, Normalize.css
+    HTML5, CSS3, JavaScript
+    jQuery, Bootstrap, Font Awesome
