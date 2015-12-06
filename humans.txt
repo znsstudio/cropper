@@ -11,5 +11,4 @@
 
 # TECHNOLOGY COLOPHON
 
-    HTML5, CSS3, JavaScript
-    jQuery, Bootstrap, Font Awesome
+    HTML5, CSS3, JavaScript, jQuery, Bootstrap, Font Awesome
