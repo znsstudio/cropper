@@ -1,5 +1,5 @@
-# [Cropper](https://github.com/fengyuanchen/cropper)
+# Cropper
 
 > A simple jQuery image cropping plugin.
 
-- [Demo](http://fengyuanchen.github.io/cropper)
+- [Homepage](http://fengyuanchen.github.io/cropper)
