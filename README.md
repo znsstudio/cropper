@@ -2,4 +2,4 @@
 
 > A simple jQuery image cropping plugin.
 
-- [Homepage](http://fengyuanchen.github.io/cropper)
+- [Website](https://fengyuanchen.github.io/cropper)
